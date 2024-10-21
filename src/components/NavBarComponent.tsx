@@ -7,11 +7,3 @@ const NavBar = () => {
 }
 
 export default NavBar;
-
-/* 
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
-            <div className="container-fluid">
-                <a className="navbar-brand" href="#">Sercel RCC Simulateur</a>
-            </div>
-        </nav>
-    */

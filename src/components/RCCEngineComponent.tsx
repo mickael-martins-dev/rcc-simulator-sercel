@@ -21,8 +21,16 @@ const RCCEngine = () => {
 
     const computeCadreSection = (): IResult => {
 
-        const step1 = 1 / 5 * salary * Math.min(year, 7); // 0-7 ans
-        const step2 = 3 / 5 * salary * Math.max(0, year - 7); // >7 ans 
+        let step1 = 0;
+        let step2 = 0;
+        if( year <= 7) {
+            step1 = 4/5 * salary * Math.min(year, 7); // 0-7 ans
+            step2 = 0; // Not exist
+        }
+        else if( year > 7) {
+            step1 = 1/5*salary * Math.min(year, 7); // 0-7 ans
+            step2 = 3/5*salary * Math.max(0, year - 7); // >7 ans 
+        }
         const factor = employeeAge > 55 ? 1.3 : employeeAge > 50 ? 1.2 : 1;
         const sum = step1 + step2;
 
@@ -31,15 +39,13 @@ const RCCEngine = () => {
         const result2 = <>
             <h5> Légale </h5>
             <ul>
-                <li> 7 premiere année : 1/5 * {CurrencyFormater.format(salary)} *  {Math.min(year, 7)}  = {CurrencyFormater.format(step1)}  </li>
-                <li> Au-delà de 7 ans : 3/5 * {CurrencyFormater.format(salary)} *  {Math.max(0, year - 7)} = {CurrencyFormater.format(step2)}  </li>
+                <li> 1-7 ans : {CurrencyFormater.format(salary)} * {Math.min(year, 7)}  = {CurrencyFormater.format(step1)}  </li>
+                <li> 8ans et plus : 3/5 * {CurrencyFormater.format(salary)} * {Math.max(0, year - 7)} = {CurrencyFormater.format(step2)}  </li>
                 {(factor > 1) && <li> Coefficient d'ancienneté {(factor * 100) % 100} % </li>}
                 <p className="d-flex justify-content-end">
                     <h5 style={{ fontWeight: 600 }}> {CurrencyFormater.format(sum * factor)} </h5>
                 </p>
-
             </ul>
-
             <h5> Supra </h5>
             <ul>
                 <p className="m-0"> + Base forfaitaire : {CurrencyFormater.format(DEFAULT_BASE_FORFATAIRE)}  </p>
@@ -53,7 +59,6 @@ const RCCEngine = () => {
             <div className="d-flex justify-content-end">
                 <h4 style={{ fontWeight: 600 }}> {total} </h4>
             </div>
-
         </>;
 
         return {
@@ -64,8 +69,8 @@ const RCCEngine = () => {
 
     const computeNonCadreSection = (): IResult => {
 
-        const step1 = 1 / 4 * salary * Math.min(year, 10); // 0-10 ans
-        const step2 = 1 / 3 * salary * Math.max(0, year - 10); // > 10 ans
+        const step1 = 1/4 * salary * Math.min(year, 10); // 0-10 ans
+        const step2 = 1/3 * salary * Math.max(0, year - 10); // > 10 ans
         const sum = step1 + step2;
 
         const total = CurrencyFormater.format(sum + DEFAULT_BASE_FORFATAIRE + (salary * 4));
@@ -73,14 +78,13 @@ const RCCEngine = () => {
         const result2 = <>
             <h5> Légale </h5>
             <ul>
-                <li> 10 premiere année : 1/4 * {CurrencyFormater.format(salary)} *  {Math.min(year, 10)}  = {CurrencyFormater.format(step1)}  </li>
-                <li> Au-delà de 10 ans : 1/3 * {CurrencyFormater.format(salary)} *  {Math.max(0, year - 10)} = {CurrencyFormater.format(step2)}  </li>
+                <li> 1-10ans : 1/4 * {CurrencyFormater.format(salary)} *  {Math.min(year, 10)}  = {CurrencyFormater.format(step1)}  </li>
+                <li> 11ans et plus : 1/3 * {CurrencyFormater.format(salary)} *  {Math.max(0, year - 10)} = {CurrencyFormater.format(step2)}  </li>
                 <p className="d-flex justify-content-end">
                     <h5 style={{ fontWeight: 600 }}> {CurrencyFormater.format(sum)} </h5>
                 </p>
 
             </ul>
-
             <h5> Supra </h5>
             <ul>
                 <p className="m-0"> + Base forfaitaire : {CurrencyFormater.format(DEFAULT_BASE_FORFATAIRE)}  </p>
