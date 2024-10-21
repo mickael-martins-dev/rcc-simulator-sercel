@@ -37,7 +37,7 @@ const RCCEngine = () => {
             line1 = `1-7 ans : 1/5 * ${CurrencyFormater.format(salary)} * ${Math.min(year, 7)} = ${CurrencyFormater.format(step1)} `
             line2 =`8 ans et plus : 3/5 * ${CurrencyFormater.format(salary)} * ${Math.max(0, year - 7)} = ${CurrencyFormater.format(step2)}`
         }
-        const factor = employeeAge > 55 ? 1.3 : employeeAge > 50 ? 1.2 : 1;
+        const factor = employeeAge >= 55 ? 1.3 : employeeAge >= 50 ? 1.2 : 1;
         const sum = step1 + step2;
 
         const total = CurrencyFormater.format(sum * factor + DEFAULT_BASE_FORFATAIRE + (salary * 4));
