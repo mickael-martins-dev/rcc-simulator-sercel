@@ -26,9 +26,9 @@ const RCCEngine = () => {
         let line1="";
         let line2="";
         if( year <= 7) {
-            step1 = 4/5 * salary * Math.min(year, 7); // 0-7 ans
+            step1 = 1/4 * salary * Math.min(year, 7); // 0-7 ans
             step2 = 0; // Not exist
-            line1 = `1-7 ans : 4/5 * ${CurrencyFormater.format(salary)} * ${Math.min(year, 7)} = ${CurrencyFormater.format(step1)}`
+            line1 = `1-7 ans : 1/4 * ${CurrencyFormater.format(salary)} * ${Math.min(year, 7)} = ${CurrencyFormater.format(step1)}`
             line2 = "";
         }
         else if( year > 7) {
