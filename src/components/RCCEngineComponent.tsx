@@ -23,13 +23,19 @@ const RCCEngine = () => {
 
         let step1 = 0;
         let step2 = 0;
+        let line1="";
+        let line2="";
         if( year <= 7) {
             step1 = 4/5 * salary * Math.min(year, 7); // 0-7 ans
             step2 = 0; // Not exist
+            line1 = `1-7 ans : 4/5 * ${CurrencyFormater.format(salary)} * ${Math.min(year, 7)} = ${CurrencyFormater.format(step1)}`
+            line2 = "";
         }
         else if( year > 7) {
             step1 = 1/5*salary * Math.min(year, 7); // 0-7 ans
             step2 = 3/5*salary * Math.max(0, year - 7); // >7 ans 
+            line1 = `1-7 ans : 1/5 * ${CurrencyFormater.format(salary)} * ${Math.min(year, 7)} = ${CurrencyFormater.format(step1)} `
+            line2 =`8 ans et plus : 3/5 * ${CurrencyFormater.format(salary)} * ${Math.max(0, year - 7)} = ${CurrencyFormater.format(step2)}`
         }
         const factor = employeeAge > 55 ? 1.3 : employeeAge > 50 ? 1.2 : 1;
         const sum = step1 + step2;
@@ -39,8 +45,8 @@ const RCCEngine = () => {
         const result2 = <>
             <h5> Légale </h5>
             <ul>
-                <li> 1-7 ans : {CurrencyFormater.format(salary)} * {Math.min(year, 7)}  = {CurrencyFormater.format(step1)}  </li>
-                <li> 8ans et plus : 3/5 * {CurrencyFormater.format(salary)} * {Math.max(0, year - 7)} = {CurrencyFormater.format(step2)}  </li>
+                <li> {line1} </li>
+                <li> {line2} </li>
                 {(factor > 1) && <li> Coefficient d'ancienneté {(factor * 100) % 100} % </li>}
                 <p className="d-flex justify-content-end">
                     <h5 style={{ fontWeight: 600 }}> {CurrencyFormater.format(sum * factor)} </h5>
