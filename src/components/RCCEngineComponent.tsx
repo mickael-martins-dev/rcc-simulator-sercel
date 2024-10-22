@@ -49,8 +49,8 @@ const RCCEngine = () => {
         const result2 = <>
             <h5> Légale </h5>
             <ul>
-                <li> {line1} </li>
-                <li> {line2} </li>
+                <li> { line1 } </li>
+                <li> { line2 }</li>
                 {(factor > 1) && <li> Coefficient d'ancienneté {(factor * 100) % 100} % </li>}
                 <p className="d-flex justify-content-end">
                     <h5 style={{ fontWeight: 600 }}> {CurrencyFormater.format(sumLegal)} </h5>
